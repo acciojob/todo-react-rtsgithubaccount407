@@ -1,43 +1,49 @@
-
-import React,{useState} from "react";
-import './../styles/App.css';
+import React, { useState } from 'react'
+import '../styles/App.css'
 
 const App = () => {
   const [todo, setTodo] = useState("");
-  const [todoList, setTodoList] = useState([]);
+  const [addtodo,setAddTodo] = useState([])
 
-  function implementAddToDo(e) {
+  const handleAdd = (e) => {
     e.preventDefault();
-    setTodoList([...todoList, todo])
-    setTodo("")
+    setAddTodo([...addtodo, todo])
+    
   }
 
-  function handleDelete(index) {
+  const handleDelete = (index) => {
+    setAddTodo(addtodo.filter((todo, i)=> i !== index ))
+   };
+  
 
-    setTodoList(todoList.filter((value,position)=>position !== index))
-  }
   return (
     <div>
-      <form onSubmit={implementAddToDo}>
+      <h1>To-DO List</h1>
+      <form>
         <input
           type="text"
-          onChange={(e) => setTodo(e.target.value)}
+          id="todo"
+          name="todo"
           value={todo}
+          onChange={(e) => setTodo(e.target.value)}
         />
-        <button type="submit">Add Todo</button>
+        <button onClick={handleAdd}>Add Todo</button>
       </form>
-      <ul>
-        {todoList.map((item,index) => {
-          return (
-            <li key={item}>
-              {item}
+
+      {addtodo.map((todo,index) => {
+        return (
+          <ul key={index}>
+            <div className="todo-item">
+              <p>
+                <li>{todo}</li>
+              </p>
               <button onClick={()=>handleDelete(index)}>Delete</button>
-            </li>
-          );
-        })}
-      </ul>
+            </div>
+          </ul>
+        );
+      })}
     </div>
   );
-};
+}
 
-export default App;
+export default App

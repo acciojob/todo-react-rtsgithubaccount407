@@ -1,1 +1,11 @@
 
+.todo-item{
+    display:flex;
+    justify-content: space-between;
+    width:10%;
+}
+.todo-item button{
+    width:50px;
+    height:30px
+}
+ 
